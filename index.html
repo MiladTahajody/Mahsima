@@ -4,31 +4,121 @@
 
 <head>
     <meta charset="utf-8">
-
-    <!-- Start of headStart -->
-
-    <!-- End of headStart -->
     <meta name="viewport" content="width=device-width">
-    <meta name="generator" content="Framer d65dc2b">
-    <title>MAHSIMA SOJOUDY</title>
+    <title>Mahsima Sojoudy</title>
+<!-- Start: Force-remove Framer badge & lock title -->
+<script>
+(function () {
+  const desiredTitle = "Mahsima Sojoudy";
 
-    <meta name="framer-search-index"
-        content="https://framerusercontent.com/sites/4UhxAIMnTCIa6eTrz2Heim/searchIndex-TfiGbO8pdGqP.json">
-    <meta name="framer-search-index-fallback"
-        content="https://framerusercontent.com/sites/4UhxAIMnTCIa6eTrz2Heim/searchIndex-YXZappvYasDF.json">
-    <link href="https://framerusercontent.com/sites/icons/default-favicon-light.v1.png" rel="icon"
-        media="(prefers-color-scheme: light)">
-    <link href="https://framerusercontent.com/sites/icons/default-favicon-dark.v1.png" rel="icon"
-        media="(prefers-color-scheme: dark)">
-    <link rel="apple-touch-icon" href="https://framerusercontent.com/sites/icons/default-touch-icon.v3.png">
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
+  // Ensure title element exists and set it
+  try {
+    const head = document.head || document.getElementsByTagName('head')[0];
+    let titleEl = head.querySelector('title');
+    if (!titleEl) {
+      titleEl = document.createElement('title');
+      head.appendChild(titleEl);
+    }
+    titleEl.textContent = desiredTitle;
+    document.title = desiredTitle;
+  } catch (e) {}
 
-    <meta name="robots" content="max-image-preview:large">
-    <link rel="canonical" href="https://snow-part-458071.framer.app/">
-    <meta property="og:url" content="https://snow-part-458071.framer.app/">
+  // Observe and restore <title> changes
+  try {
+    const head = document.head || document.getElementsByTagName('head')[0];
+    const titleEl = head.querySelector('title');
+    if (titleEl) {
+      const titleObserver = new MutationObserver(() => {
+        if (titleEl.textContent !== desiredTitle) titleEl.textContent = desiredTitle;
+      });
+      titleObserver.observe(titleEl, { childList: true, subtree: true, characterData: true });
+    }
+  } catch (e) {}
+
+  // Try to override document.title setter (best-effort)
+  try {
+    const docProto = Object.getPrototypeOf(document);
+    const desc = Object.getOwnPropertyDescriptor(docProto, 'title');
+    if (desc && desc.configurable) {
+      Object.defineProperty(document, 'title', {
+        get: function() { return desiredTitle; },
+        set: function() { /* blocked */ },
+        configurable: true
+      });
+    } else {
+      Object.defineProperty(document, 'title', {
+        get: function() { return desiredTitle; },
+        set: function() { /* blocked */ }
+      });
+    }
+  } catch (e) {}
+
+  // Add CSS to hide known Framer badge elements
+  try {
+    const style = document.createElement('style');
+    style.id = 'hide-framer-badge';
+    style.textContent = `
+      #__framer-badge-container, .__framer-badge, [data-framer-name="Light"], a[href*="framer.com"]{ display:none !important; visibility:hidden !important; pointer-events:none !important; }
+      /* Extra safety for variants */
+      [id*="framer"], [class*="framer-"] a[href*="framer.com"] { display:none !important; }
+    `;
+    (document.head || document.documentElement).appendChild(style);
+  } catch (e) {}
+
+  // Function to remove badge-like nodes
+  function removeBadgeNode(node) {
+    try {
+      if (!node || node.nodeType !== 1) return;
+      const el = node;
+      if (el.id === '__framer-badge-container' || el.classList.contains('__framer-badge') || el.getAttribute && el.getAttribute('data-framer-name') === 'Light') {
+        el.remove();
+        return;
+      }
+      if (el.tagName === 'A' && el.href && el.href.indexOf('framer.com') !== -1) {
+        el.remove();
+        return;
+      }
+      const found = el.querySelectorAll ? el.querySelectorAll('#__framer-badge-container, .__framer-badge, [data-framer-name="Light"], a[href*="framer.com"]') : [];
+      found.forEach(n => n.remove());
+    } catch (e) {}
+  }
+
+  // MutationObserver to remove badges that are injected later
+  try {
+    const mo = new MutationObserver((mutations) => {
+      for (const mut of mutations) {
+        for (const node of mut.addedNodes) {
+          removeBadgeNode(node);
+        }
+        // If attributes changed on an element, re-check it
+        if (mut.type === 'attributes') removeBadgeNode(mut.target);
+      }
+    });
+    mo.observe(document.documentElement || document, { childList: true, subtree: true, attributes: true, attributeFilter: ['id', 'class', 'href', 'data-framer-name'] });
+  } catch (e) {}
+
+  // Immediate cleanup
+  try {
+    removeBadgeNode(document.getElementById('__framer-badge-container'));
+    document.querySelectorAll('.__framer-badge, [data-framer-name="Light"], a[href*="framer.com"]').forEach(n => n.remove());
+  } catch (e) {}
+
+  // Fallback interval: run a few times in the first seconds to ensure removal
+  try {
+    const endTime = Date.now() + 8000;
+    const interval = setInterval(()=> {
+      try { document.title = desiredTitle; } catch(e){}
+      document.querySelectorAll('#__framer-badge-container, .__framer-badge, [data-framer-name="Light"], a[href*="framer.com"]').forEach(n => n.remove());
+      if (Date.now() > endTime) clearInterval(interval);
+    }, 200);
+  } catch(e){}
+
+})(); 
+</script>
+<!-- End: Force-remove Framer badge & lock title -->
+
+
+
     <style data-framer-breakpoint-css>
         @media(min-width: 1920px) {
             .hidden-1cj1m82 {
@@ -112,9 +202,7 @@
             font-weight: 400
         }
 
-        body {
-            --framer-will-change-override: none
-        }
+       
 
         @supports (background: -webkit-named-image(i)) and (not (grid-template-rows: subgrid)) {
             body {
@@ -1814,15 +1902,7 @@
             function c(t, r) { let e = r.indexOf("#"), n = e === -1 ? r : r.substring(0, e), o = e === -1 ? "" : r.substring(e), a = n.indexOf("?"); if (a === -1) return n + t + o; let d = new URLSearchParams(t), h = n.substring(a + 1), s = new URLSearchParams(h); for (let [i, m] of d) s.has(i) || s.append(i, m); return n.substring(0, a + 1) + s.toString() + o } var l = 'div#main a[href^="#"],div#main a[href^="/"],div#main a[href^="."]', u = "div#main a[data-framer-preserve-params]", f, g = (f = document.currentScript) == null ? void 0 : f.hasAttribute("data-preserve-internal-params"); if (window.location.search && !/bot|-google|google-|yandex|ia_archiver|crawl|spider/iu.test(navigator.userAgent)) { let t = document.querySelectorAll(g ? `${l},${u}` : u); for (let r of t) { let e = c(window.location.search, r.href); r.setAttribute("href", e) } }
         }()</script>
 
-    <div id="__framer-badge-container"><!--$--><!--$--><!--$--><a
-            class="framer-6jWyo framer-n0ccwk framer-v-n0ccwk framer-bmpgw8 __framer-badge"
-            data-framer-appear-id="n0ccwk" data-framer-name="Light" data-nosnippet="true"
-            style="will-change:transform;pointer-events:auto;opacity:0.001;transform:translateY(10px)"
-            href="https://www.framer.com" rel="noopener"
-            title="Create a free website with Framer, the website builder loved by startups, designers and agencies.">
-            <div class="framer-13yxzio" data-framer-name="Backdrop"
-                style="background-color:rgb(255, 255, 255);border-bottom-left-radius:10px;border-bottom-right-radius:10px;border-top-left-radius:10px;border-top-right-radius:10px;box-shadow:0px 0.6021873017743928px 1.5656869846134214px -1.5px rgba(0, 0, 0, 0.17), 0px 2.288533303243457px 5.950186588432988px -3px rgba(0, 0, 0, 0.14), 0px 10px 26px -4.5px rgba(0, 0, 0, 0.02)">
-            </div>
+    
             <div class="framer-19yaanm" data-framer-name="Content" style="transform:translate(-50%, -50%)">
                 <div class="framer-1kflzx5">
                     <div data-framer-name="Logo" class="framer-hcsc7 framer-e50co"
